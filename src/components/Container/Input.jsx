@@ -1,11 +1,12 @@
 import React from "react";
 import { FcSearch } from "react-icons/fc";
 import "./input.css";
+
 const Input = (props) => {
   const { city, setCity, getWeather } = props;
 
   return (
-    <div className="formInput">
+    <form className="formInput" onSubmit={getWeather}>
       <input
         type="text"
         className="inputValue"
@@ -14,12 +15,11 @@ const Input = (props) => {
         onChange={(e) => {
           setCity(e.target.value);
         }}
-        onKeyPress={getWeather}
       />
-      <span className="inputIcon">
+      <span className="inputIcon" onClick={getWeather}>
         <FcSearch></FcSearch>
       </span>
-    </div>
+    </form>
   );
 };
 

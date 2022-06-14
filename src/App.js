@@ -1,72 +1,38 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Input from "./components/Container/Input";
+import DataWether from "./components/Container/DataWeather";
 
 function App() {
-  const [weatherData, setWaetherData] = useState([{}]);
   const [city, setCity] = useState("");
-
-  const [degress, setDegrees] = useState(null);
-  const [loaction, setLocation] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [icon, setIcon] = useState(null);
-  const [humidity, setHumidity] = useState(null);
-  const [wind, setWind] = useState(null);
-  const [country, setCountry] = useState(null);
+  const [weatherData, setWaetherData] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   async function getWeather(event) {
-    if (event.key == "Enter") {
-      console.log(typeof weatherData.main);
-      let data = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
-      );
-      data = await data.json();
-      console.log(data);
-      setDegrees(data.main.temp);
-      setLocation(data.name);
-      setDescription(data.weather[0].description);
-      setIcon(data.weather[0].icon);
-      setHumidity(data.main.humidity);
-      setWind(data.wind.speed);
-      setCountry(data.sys.country);
-    }
+    event.preventDefault();
+    setIsLoading(true);
+    let data = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
+    );
+    data = await data.json();
+    setWaetherData(data);
+    setIsLoading(false);
   }
 
   return (
     <div className="app">
       <div className="weather">
         <Input city={city} setCity={setCity} getWeather={getWeather} />
-
-        <div>
-          <h3 className="weatherLocation">Weather in {loaction}</h3>
-          <div className="weatherDegrees">
-            <h1>{degress} º C </h1>
-          </div>
-
-          <div className="weatherDescription">
-            <div>
-              <div className="weatherDescriptionHead">
-                <img
-                  src={`http://openweathermap.org/img/w/${icon}.png`}
-                  alt="weather icon"
-                />
-                <h3>{description} </h3>
-              </div>
-              <h3>Humidity: {humidity}%</h3>
-              <h3>Wind speed: {wind}m/s</h3>
-            </div>
-            <div className="w">
-              <h3>{country}</h3>
-              <h2 className="weatherDate">4/30/2022, 2:05:24 PM</h2>
-            </div>
-          </div>
-        </div>
+        {isLoading ? (
+          <div className="loader">loading</div>
+        ) : weatherData.cod === 200 ? (
+          <DataWether weatherData={weatherData} />
+        ) : (
+          weatherData.cod === "404" && <h3>city not found</h3>
+        )}
       </div>
     </div>
   );
 }
 
-{
-  /* <span>🧊</span><span>❄</span><span>🌨</span><span>🌦</span><span>🌥</span><span>☀</span> */
-}
 export default App;
