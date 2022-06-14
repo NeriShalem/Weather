@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("https://images.unsplash.com/photo-1548266652-99cf27701ced?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80");
+  background-size: cover;
+}
+
+* {
+  font-family: sans-serif;
+}
+
+.app {
+  width: 100vm;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(225, 211, 211);
+}
+
+.container {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather {
+  width: 35rem;
+  height: 28rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  justify-content: space-around;
+}
+
+.weatherLocation {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.weatherDegrees {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+
+.weatherDescription{
+    display: flex;
+    align-items: center;
+
+}
+
+.weatherDescriptionHead{
+    display:flex;
+    align-items: center;
+
+}
+
+.weatherIcon{
+    font-size: 2.5rem;
+    margin-right: 0.8rem;
+}
+
+.weatherDescription * h3{
+    font-size: 1.4rem;
+    font-weight: normal;
+    margin-right: 1rem;
+    margin-bottom: 0.7rem;
+}
+
+.weatherDate{
+    font-size: 1rem;
+    font-weight: normal;
+    color: rgb(222, 211, 211)
+}
